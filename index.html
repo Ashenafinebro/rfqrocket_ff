@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFQRocket - Simplify Your Government Contract Bids</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0057b3be;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .3s ease;
+            text-align: center
+        }
+
+        .btn:hover {
+            background-color: #003d7a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .1)
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #0056b3;
+            color: #0056b3
+        }
+
+        .btn-outline:hover {
+            background-color: #0056b3;
+            color: #fff
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .section {
+            padding: 80px 0
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #212529;
+            position: relative;
+            display: inline-block
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #0056b3;
+            border-radius: 2px
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0056b3;
+            text-decoration: none
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none
+        }
+
+        .nav-links li {
+            margin-left: 30px
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color .3s ease
+        }
+
+        .nav-links a:hover {
+            color: #0056b3
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0056b3 0, #003d7a 100%);
+            color: #fff;
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: .5
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: .9
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px
+        }
+
+        .hero-buttons .btn {
+            min-width: 180px
+        }
+
+        .hero-buttons .btn-outline {
+            background-color: transparent;
+            border-color: #fff;
+            color: #fff
+        }
+
+        .hero-buttons .btn-outline:hover {
+            background-color: #fff;
+            color: #0056b3
+        }
+
+        .process {
+            background-color: #fff
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 15px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 30px
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -30px;
+            width: 60px;
+            height: 2px;
+            background-color: #0056b3;
+            opacity: .3
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: #0056b3;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 20px
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #0056b3
+        }
+
+        .process-step p {
+            color: #6c757d
+        }
+
+        .industries {
+            background-color: #f8f9fa
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px
+        }
+
+        .industry-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all .3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .05)
+        }
+
+        .industry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .1)
+        }
+
+        .industry-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #0056b3
+        }
+
+        .industry-card p {
+            color: #6c757d
+        }
+
+        .testimonials {
+            background-color: #fff;
+            position: relative
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .testimonial-slide {
+            display: none;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .05);
+            transition: all .3s ease
+        }
+
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn .5s ease
+        }
+
+        .testimonial-slide::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(0, 86, 179, .1);
+            font-family: Georgia, serif;
+            line-height: 1
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #495057
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #0056b3
+        }
+
+        .author-info h4 {
+            font-size: 1.2rem;
+            color: #212529;
+            margin-bottom: 5px
+        }
+
+        .author-info p {
+            color: #6c757d;
+            font-size: .9rem
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px
+        }
+
+        .testimonial-nav button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #0056b3;
+            cursor: pointer;
+            margin: 0 15px;
+            transition: all .3s ease
+        }
+
+        .testimonial-nav button:hover {
+            color: #003d7a;
+            transform: scale(1.2)
+        }
+
+        .features {
+            background-color: #f8f9fa
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            transition: all .3s ease;
+            text-align: center;
+            border-top: 4px solid #0056b3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .05)
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .1)
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 20px
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #212529
+        }
+
+        .feature-card p {
+            color: #6c757d
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #0056b3 0, #003d7a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 0
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: .9
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px
+        }
+
+        .cta-buttons .btn {
+            min-width: 180px
+        }
+
+        .cta-buttons .btn-outline {
+            background-color: transparent;
+            border-color: #fff;
+            color: #fff
+        }
+
+        .cta-buttons .btn-outline:hover {
+            background-color: #fff;
+            color: #0056b3
+        }
+
+        footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 60px 0 20px
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            display: block
+        }
+
+        .footer-about p {
+            color: #adb5bd;
+            margin-bottom: 20px
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fff
+        }
+
+        .footer-links ul {
+            list-style: none
+        }
+
+        .footer-links li {
+            margin-bottom: 10px
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color .3s ease
+        }
+
+        .footer-links a:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: .9rem
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.05)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite
+        }
+
+        @media (max-width:768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 0
+            }
+
+            .nav-links {
+                margin-top: 20px
+            }
+
+            .nav-links li {
+                margin-left: 15px;
+                margin-right: 15px
+            }
+
+            .hero {
+                padding: 150px 0 80px
+            }
+
+            .hero h1 {
+                font-size: 2.2rem
+            }
+
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center
+            }
+
+            .section {
+                padding: 60px 0
+            }
+
+            .section-title {
+                font-size: 2rem
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none
+            }
+
+            .process-step {
+                margin-bottom: 40px
+            }
+        }
+
+        @media (max-width:480px) {
+            .hero h1 {
+                font-size: 1.8rem
+            }
+
+            .hero p,
+            .cta p {
+                font-size: 1rem
+            }
+
+            .section-title {
+                font-size: 1.8rem
+            }
+
+            .feature-card,
+            .industry-card {
+                padding: 20px
+            }
+
+            .testimonial-slide {
+                padding: 30px 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">RFQRocket</a>
+                <ul class="nav-links">
+                    <li><a href="#process">How It Works</a></li>
+                    <li><a href="#industries">Industries</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Simplify Your Government Contract Bids — Instantly Create RFQs from Any Solicitation!</h1>
+                <p>Upload your PDF or DOCX and get a clean, professional RFQ in minutes. No reading 200+ pages. No confusion. Just clarity.</p>
+                <div class="hero-buttons">
+                    <a href="/upload" class="btn animate-pulse">Get Started for $0.10</a>
+                    <a href="#demo" class="btn btn-outline">Try Demo Upload</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section process" id="process">
+        <div class="container">
+            <h2 class="section-title text-center">How It Works</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Document</h3>
+                    <p>Upload your solicitation PDF, DOCX, or TXT file</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>AI Processing</h3>
+                    <p>Our AI extracts all key requirements and data</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Generate RFQ</h3>
+                    <p>Download or email a professional RFQ document</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section industries" id="industries">
+        <div class="container">
+            <h2 class="section-title text-center">Supporting Businesses Across Industries</h2>
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <i class="fas fa-broom feature-icon"></i>
+                    <h3>Janitorial</h3>
+                    <p>Streamline cleaning service contracts with automated RFQ generation.</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3>Consulting</h3>
+                    <p>Simplify complex consulting service procurement processes.</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-laptop-code feature-icon"></i>
+                    <h3>IT Services</h3>
+                    <p>Efficiently manage technology procurement and service contracts.</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Staffing</h3>
+                    <p>Quickly create RFQs for temporary and permanent staffing needs.</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-boxes feature-icon"></i>
+                    <h3>Supplies</h3>
+                    <p>Automate procurement requests for office and facility supplies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center">What Our Users Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-content">This tool cut our RFQ preparation time by 75%. What used to take days
+                        now takes hours.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Tech Solutions LLC</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-content">The AI extraction is surprisingly accurate. I barely had to make any
+                        edits before sending.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Reliable Staffing Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-content">As a small business, we couldn't afford to miss details in government
+                        solicitations. This tool ensures we catch everything.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="David Rodriguez">
+                        <div class="author-info">
+                            <h4>David Rodriguez</h4>
+                            <p>Premier Janitorial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-content">Our response rate to government RFPs has doubled since using this
+                        tool. Highly recommended!</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Amanda Taylor">
+                        <div class="author-info">
+                            <h4>Amanda Taylor</h4>
+                            <p>Office Supply Depot</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <button id="prev-testimonial"><i class="fas fa-chevron-left"></i> Previous</button>
+                    <button id="next-testimonial">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title text-center">Document Processing</h2>
+            <p class="text-center">Upload PDF or DOCX files and automatically extract key RFQ data</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-file-upload feature-icon"></i>
+                    <h3>Easy Upload</h3>
+                    <p>Simply upload your solicitation documents in PDF or DOCX format. Our system handles the rest.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt feature-icon"></i>
+                    <h3>Generate Professional RFQs</h3>
+                    <p>Create polished RFQ documents with your extracted and edited data, ready for submission.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-envelope feature-icon"></i>
+                    <h3>Direct Email Delivery</h3>
+                    <p>Email RFQ documents directly to vendors from the platform, saving you time and hassle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to simplify your government contracting process?</h2>
+            <p>Start generating professional RFQ documents in minutes, not hours.</p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn">See Pricing Plans</a>
+                <a href="#demo" class="btn btn-outline">Try Demo Upload</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">RFQRocket</a>
+                    <p>Powered by Others Texted Services</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Legal</a></li>
+                        <li><a href="#">Get Started</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:info@rfqrocket.com">info@rfqrocket.com</a></li>
+                        <li><a href="tel:+18005551234">(800) 555-1234</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RFQRocket. A service by Others Federal Services LLC.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.toggle('active', i === index);
+            });
+            currentTestimonial = index;
+        }
+
+        document.getElementById('next-testimonial').addEventListener('click', () => {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        });
+
+        document.getElementById('prev-testimonial').addEventListener('click', () => {
+            let prevIndex = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(prevIndex);
+        });
+
+        setInterval(() => {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        }, 8000);
+
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.process-step, .industry-card, .feature-card');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.process-step, .industry-card, .feature-card');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+            animateOnScroll();
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+
+        const mobileMenuToggle = document.createElement('button');
+        mobileMenuToggle.className = 'mobile-menu-toggle';
+        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.querySelector('.navbar').appendChild(mobileMenuToggle);
+        mobileMenuToggle.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
