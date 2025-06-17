@@ -83,27 +83,14 @@ def split_text(text, max_length=5000):
     return chunks
 
 def process_chunk(chunk):
-    prompt = f"""Analyze this government solicitation document chunk and extract all possible information to create a comprehensive Request for Quotation (RFQ). Extract all sections, requirements, specifications, terms, and any relevant details. Structure the output as follows:
-
-1. GENERAL INFORMATION: Include solicitation number, title, agency, date, etc.
-2. REQUIREMENTS: Detailed technical requirements and specifications
-3. DELIVERABLES: List of all required deliverables
-4. PERIOD_OF_PERFORMANCE: Start/end dates or duration
-5. EVALUATION_CRITERIA: How proposals will be evaluated
-6. SUBMISSION_REQUIREMENTS: Format, deadlines, submission instructions
-7. TERMS_AND_CONDITIONS: Contractual terms and conditions
-8. CONTACT_INFORMATION: Points of contact
+    prompt = f"""Extract and summarize the vendor-facing RFQ details per the instructions above. Remove all identifying government info. Output should be clear and readable by a commercial vendor preparing a quote.
 
 Document Text:
 {chunk}
 
 Provide the output in JSON format with these exact top-level keys. Include all relevant details under each section."""
-    
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4-1106-preview",
-            messages=[
-                {"role": "system", "content": """You are an AI assistant helping a procurement intermediary create vendor-safe RFQs from government solicitations. Your task is to:
+
+    systemPrompt = """You are an AI assistant helping a procurement intermediary create vendor-safe RFQs from government solicitations. Your task is to:
 
 Extract only the relevant details required for vendors or suppliers to provide a price quote, such as:
 
@@ -137,7 +124,13 @@ Any FAR/DFARS clause references or legal compliance details
 
 Reformat and rewrite the content into a clean, neutral RFQ format suitable for vendor distribution.
 
-The result should look like a generic RFQ issued by a private intermediary, with no traceable connection to the government client."""},
+The result should look like a generic RFQ issued by a private intermediary, with no traceable connection to the government client."""
+    
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-1106-preview",
+            messages=[
+                {"role": "system", "content": systemPrompt},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.2,
