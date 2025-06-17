@@ -103,7 +103,7 @@ Provide the output in JSON format with these exact top-level keys. Include all r
         response = openai.ChatCompletion.create(
             model="gpt-4-1106-preview",
             messages=[
-                {"role": "system", "content": "You are an AI assistant generating vendor-safe RFQs from government solicitations. Extract only the info vendors need to quote—scope, specs, quantities, delivery, performance period, city/state location, evaluation criteria, and submission format. Remove all agency names, contacts, solicitation numbers, compliance references (FAR, SAM), and base-identifying details. Rewrite the output as a clean, private RFQ with no government identifiers"},
+                {"role": "system", "content": "Extract relevant details for pricing—scope of work, technical specs, quantity, delivery, performance period, city/state, evaluation criteria, and submission format (price, tech info, past performance); remove all references to government agencies, officers, contact info, base/building names, solicitation numbers, and legal language (FAR/DFARS, SAM, clauses)."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.2,
