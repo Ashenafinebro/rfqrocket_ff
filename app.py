@@ -103,7 +103,7 @@ Provide the output in JSON format with these exact top-level keys. Include all r
         response = openai.ChatCompletion.create(
             model="gpt-4-1106-preview",
             messages=[
-                {"role": "system", "content": "Extract pricing info (scope, specs, quantity, delivery, location, criteria, format) and remove all agency names, contacts, locations, IDs, and legal references."},
+                {"role": "system", "content": "You are a government contracts specialist that analyzes solicitation documents and creates professional RFQs."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.2,
