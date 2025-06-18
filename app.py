@@ -83,54 +83,41 @@ def split_text(text, max_length=5000):
     return chunks
 
 def process_chunk(chunk):
-    prompt = f"""Extract and summarize the vendor-facing RFQ details per the instructions above. Remove all identifying government info. Output should be clear and readable by a commercial vendor preparing a quote.
+    prompt = f"""You are an AI assistant helping a procurement intermediary create vendor-safe RFQs from government solicitations. Your task is to:
+
+Extract only the relevant details required for vendors or suppliers to provide a price quote, such as:
+
+1. Description of goods or services required
+2. Technical specifications or performance requirements
+3. Quantity, units, and delivery time
+4. Period of performance
+5. Site of performance (city/state only, no base name or agency)
+6. Evaluation criteria (price, technical capability, past performance)
+7. Submission format (quote with price, technical proposal, past performance info)
+
+Completely remove or redact all references to:
+
+Government agencies or departments (e.g., Air Force, VA)
+Contracting officers and their emails or names
+Location details that reveal the agency (e.g., base name, building number)
+Solicitation number or contract number
+SAM registration requirements or clauses
+Any FAR/DFARS clause references or legal compliance details
+
+Reformat and rewrite the content into a clean, neutral RFQ format suitable for vendor distribution.
+
+The result should look like a generic RFQ issued by a private intermediary, with no traceable connection to the government client.
 
 Document Text:
 {chunk}
 
 Provide the output in JSON format with these exact top-level keys. Include all relevant details under each section."""
-
-    systemPrompt = """You are an AI assistant helping a procurement intermediary create vendor-safe RFQs from government solicitations. Your task is to:
-
-Extract only the relevant details required for vendors or suppliers to provide a price quote, such as:
-
-Description of goods or services required
-
-Technical specifications or performance requirements
-
-Quantity, units, and delivery time
-
-Period of performance
-
-Site of performance (city/state only, no base name or agency)
-
-Evaluation criteria (price, technical capability, past performance)
-
-Submission format (quote with price, technical proposal, past performance info)
-
-Completely remove or redact all references to:
-
-Government agencies or departments (e.g., Air Force, VA)
-
-Contracting officers and their emails or names
-
-Location details that reveal the agency (e.g., base name, building number)
-
-Solicitation number or contract number
-
-SAM registration requirements or clauses
-
-Any FAR/DFARS clause references or legal compliance details
-
-Reformat and rewrite the content into a clean, neutral RFQ format suitable for vendor distribution.
-
-The result should look like a generic RFQ issued by a private intermediary, with no traceable connection to the government client."""
     
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4-1106-preview",
             messages=[
-                {"role": "system", "content": systemPrompt},
+                {"role": "system", "content": "You are a government contracts specialist that analyzes solicitation documents and creates professional RFQs."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.2,
