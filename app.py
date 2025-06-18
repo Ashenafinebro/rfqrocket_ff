@@ -83,17 +83,7 @@ def split_text(text, max_length=5000):
     return chunks
 
 def process_chunk(chunk):
-    prompt = f"""You are an AI assistant helping a procurement intermediary create vendor-safe RFQs from government solicitations. Your task is to:
-
-Extract only the relevant details required for vendors or suppliers to provide a price quote, such as:
-
-1. Description of goods or services required
-2. Technical specifications or performance requirements
-3. Quantity, units, and delivery time
-4. Period of performance
-5. Site of performance (city/state only, no base name or agency)
-6. Evaluation criteria (price, technical capability, past performance)
-7. Submission format (quote with price, technical proposal, past performance info)
+    prompt = f"""Analyze this government solicitation document chunk and extract all possible information to create a comprehensive Request for Quotation (RFQ). Extract all sections, requirements, specifications, terms, and any relevant details. Structure the output as follows:
 
 Completely remove or redact all references to:
 
@@ -104,9 +94,16 @@ Solicitation number or contract number
 SAM registration requirements or clauses
 Any FAR/DFARS clause references or legal compliance details
 
-Reformat and rewrite the content into a clean, neutral RFQ format suitable for vendor distribution.
+Extract and summarize only the relevant details required for vendors or suppliers to provide a price quote, such as:
 
-The result should look like a generic RFQ issued by a private intermediary, with no traceable connection to the government client.
+1. GENERAL INFORMATION: Include solicitation number, title, agency, date, etc.
+2. REQUIREMENTS: Detailed technical requirements and specifications
+3. DELIVERABLES: List of all required deliverables
+4. PERIOD_OF_PERFORMANCE: Start/end dates or duration
+5. EVALUATION_CRITERIA: How proposals will be evaluated
+6. SUBMISSION_REQUIREMENTS: Format, deadlines, submission instructions
+7. TERMS_AND_CONDITIONS: Contractual terms and conditions
+8. CONTACT_INFORMATION: Points of contact
 
 Document Text:
 {chunk}
